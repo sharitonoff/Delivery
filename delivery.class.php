@@ -2,8 +2,8 @@
 /*!
     \brief Класс службы доставки
   
-    @date 28.02.2023
-    @version 1.0.2
+    @date 01.03.2023
+    @version 1.0.3
     @author    Sergey Haritonof <info@haritonof.site>
     @copyright 2023 (c) Sergey Haritonof
 */
@@ -29,7 +29,7 @@ class Delivery {
             $services[] = 'dhl';
         }
         // Почта россии
-        if( preg_match( '/^([0-9]{14})$/iu', $track ) or preg_match( '/^(CB|CL|RB)([0-9]{9})RU$/iu', $track ) ) {
+        if( preg_match( '/^([0-9]{14})$/iu', $track ) or preg_match( '/^(C|E|L|R)([A-Z]{1})([0-9]{9})RU$/iu', $track ) ) {
 
             $services[] = 'ruspost';
         }
@@ -39,7 +39,7 @@ class Delivery {
             $services[] = 'iml';
         }
         // China EMS ePacket
-        if( preg_match( '/^(EA|LC|LK|LM|LQ)([0-9]{9})CN$/iu', $track ) ) {
+        if( preg_match( '/^(E|L)([A-Z]{1})([0-9]{9})CN$/iu', $track ) ) {
             
             $services[] = 'chinaems';
         }
@@ -69,12 +69,12 @@ class Delivery {
             $services[] = 'usps';
         }
         // Почта Китая
-        if( preg_match( '/^R([A-Z]{1})([0-9]{9})CN$/iu', $track ) or preg_match( '/^CP([0-9]{9})CN$/iu', $track ) ) {
+        if( preg_match( '/^(C|R|U)([A-Z]{1})([0-9]{9})CN$/iu', $track ) ) {
             
             $services[] = 'chinapost';
         }
         // Почта Гонконга
-        if( preg_match( '/^R([A-Z]{1})([0-9]{9})HK$/iu', $track ) ) {
+        if( preg_match( '/^R([A-Z]{1})([0-9]{9})HK$/iu', $track ) or preg_match( '/^Z(B-IK-Z)([0-9]{9})HK$/iu', $track ) ) {
             
             $services[] = 'hkpost';
         }
@@ -84,12 +84,12 @@ class Delivery {
             $services[] = 'posti';
         }
         // DHL Global Mail
-        if( preg_match( '/^(RX)([0-9]{9})DE$/iu', $track ) ) {
+        if( preg_match( '/^(RS|RX)([0-9]{9})DE$/iu', $track ) ) {
             
             $services[] = 'dhlglobalmail';
         }
         // SunYou
-        if( preg_match( '/^SYLLD([0-9]{8})$/iu', $track ) ) {
+        if( preg_match( '/^SYLLD([0-9]{8})$/iu', $track ) or preg_match( '/^SY([0-9]{11})$/iu', $track ) ) {
             
             $services[] = 'sypost';
         }
@@ -99,7 +99,7 @@ class Delivery {
             $services[] = 'swedenposten';
         }
         // Почта Нидерландов
-        if( preg_match( '/^(RS)([0-9]{9})NL$/iu', $track ) ) {
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})NL$/iu', $track ) ) {
             
             $services[] = 'postnl';
         }
@@ -114,12 +114,12 @@ class Delivery {
             $services[] = 'fedex';
         }
         // Aliexpress Standard Shipping
-        if( preg_match( '/^(RV|ZH|ZN)([0-9]{9})HK$/iu', $track ) or preg_match( '/^(LP)([0-9]{14})$/iu', $track ) ) {
+        if( preg_match( '/^(ZA)([0-9]{9})LV$/iu', $track ) or preg_match( '/^(RV|UA|ZA|ZH|ZN)([0-9]{9})HK$/iu', $track ) or preg_match( '/^(LP)([0-9]{14})$/iu', $track ) ) {
             
             $services[] = 'cainiao';
         }
         // Почта Сингапура
-        if( preg_match( '/^(RB|RF)([0-9]{9})SG$/iu', $track ) ) {
+        if( preg_match( '/^(L|R)([A-Z]{1})([0-9]{9})SG$/iu', $track ) ) {
             
             $services[] = 'singaporepost';
         }
@@ -127,6 +127,51 @@ class Delivery {
         if( preg_match( '/^P000000([0-9]{6})$/iu', $track ) ) {
             
             $services[] = '4px';
+        }
+        // Почта Казахстана
+        if( preg_match( '/^(AP|CO|CP|EE|EL|IA|RR|RW)([0-9]{9})KZ$/iu', $track ) ) {
+            
+            $services[] = 'kazpochta';
+        }
+        // Почта Малайзии
+        if( preg_match( '/^(RQ|UD)([0-9]{9})MY$/iu', $track ) ) {
+            
+            $services[] = 'malaysiapost';
+        }
+        // J-NET
+        if( preg_match( '/^JNTCU([0-9]{10})YQ$/iu', $track ) ) {
+            
+            $services[] = 'jnet';
+        }
+        // BEL
+        if( preg_match( '/^BELLY([0-9]{10})YQ$/iu', $track ) ) {
+            
+            $services[] = '8256ru';
+        }
+        // Почта Эстонии
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})EE$/iu', $track ) ) {
+            
+            $services[] = 'omniva';
+        }
+        // Yun Express
+        if( preg_match( '/^YT([0-9]{16})$/iu', $track ) ) {
+
+            $services[] = 'yuntrack';
+        }
+        // YANWEN international express
+        if( preg_match( '/^(UB|UD|UG|UR|VR)([0-9]{9})YP$/iu', $track ) ) {
+
+            $services[] = 'yanwen';
+        }
+        // Joom Logistics
+        if( preg_match( '/^(ZJ)([0-9]{9})HK$/iu', $track ) ) {
+            
+            $services[] = 'joom';
+        }
+        // Почта Турции
+        if( preg_match( '/^(UH)([0-9]{9})TR$/iu', $track ) ) {
+            
+            $services[] = 'pttposta';
         }
 
         return $services;
@@ -159,7 +204,16 @@ class Delivery {
                'fedex'      => 'FedEx',
                'cainiao'    => 'Aliexpress Standard Shipping',
                'singaporepost' => 'Почта Сингапура',
-               '4px'        => '4PX Express' ];
+               '4px'        => '4PX Express',
+               'kazpochta'  => 'Почта Казахстана',
+               'malaysiapost' => 'Почта Малайзии',
+               'jnet'       => 'J-NET',
+               '8256ru'     => 'BEL',
+               'omniva'     => 'Почта Эстонии',
+               'yuntrack'   => 'Yun Express',
+               'yanwen'     => 'YANWEN international express',
+               'joom'       => 'Joom Logistics',
+               'pttposta'   => 'Почта Турции' ];
         
         return isset( $a[$code] ) ? $a[$code] : null;
     }
