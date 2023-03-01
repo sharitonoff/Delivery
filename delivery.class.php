@@ -3,7 +3,7 @@
     \brief Класс службы доставки
   
     @date 01.03.2023
-    @version 1.0.3
+    @version 1.0.4
     @author    Sergey Haritonof <info@haritonof.site>
     @copyright 2023 (c) Sergey Haritonof
 */
@@ -39,7 +39,7 @@ class Delivery {
             $services[] = 'iml';
         }
         // China EMS ePacket
-        if( preg_match( '/^(E|L)([A-Z]{1})([0-9]{9})CN$/iu', $track ) ) {
+        if( preg_match( '/^(A|E|L)([A-Z]{1})([0-9]{9})CN$/iu', $track ) ) {
             
             $services[] = 'chinaems';
         }
@@ -182,7 +182,7 @@ class Delivery {
         $a = [ 'cdek'       => 'СДЭК',
                'dhl'        => 'DHL Express',
                'dhlglobalmail' => 'DHL Global Mail',
-               'ruspost'    => 'Почта россии',
+               'ruspost'    => 'Почта России',
                'chinapost'  => 'Почта Китая',
                'rusdpd'     => 'DPD в России',
                'boxberry'   => 'Boxberry',
