@@ -2,15 +2,15 @@
 /*!
     \brief Класс службы доставки
   
-    @date 06.03.2023
-    @version 1.0.5
+    @date 07.04.2023
+    @version 1.0.6
     @author    Sergey Haritonof <info@haritonof.site>
     @copyright 2023 (c) Sergey Haritonof
 */
 
 class Delivery {
 
-    public static function getService( $track = '' ) {
+    public static function getService( $track = '' ): array {
 
         $services = [];
         // 4PX Express
@@ -54,7 +54,7 @@ class Delivery {
             $services[] = 'rusdpd';
         }
         // FedEx
-        if( preg_match( '/^([0-9]{22})$/iu', $track ) ) {
+        if( preg_match( '/^([0-9]{22})$/iu', $track ) or preg_match( '/^639([0-9]{9})$/iu', $track ) ) {
             
             $services[] = 'fedex';
         }
@@ -123,6 +123,11 @@ class Delivery {
             
             $services[] = 'hkpost';
         }
+        // Почта Израиля
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})IL$/iu', $track ) ) {
+            
+            $services[] = 'israelpost';
+        }
         // Почта Казахстана
         if( preg_match( '/^(AP|CO|CP|EE|EL|IA|RR|RW)([0-9]{9})KZ$/iu', $track ) ) {
             
@@ -148,6 +153,11 @@ class Delivery {
             
             $services[] = 'postnl';
         }
+        // Почта Норвегии
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})NO$/iu', $track ) ) {
+            
+            $services[] = 'norwaypost';
+        }
         // Почта России
         if( preg_match( '/^([0-9]{14})$/iu', $track ) or preg_match( '/^(C|E|L|R)([A-Z]{1})([0-9]{9})RU$/iu', $track ) ) {
 
@@ -168,10 +178,20 @@ class Delivery {
             
             $services[] = 'pttposta';
         }
+        // Почта Украины
+        if( preg_match( '/^R([A-Z]{1})([0-9]{9})UA$/iu', $track ) ) {
+            
+            $services[] = 'ukrposhta';
+        }
         // Почта Финляндии
         if( preg_match( '/^R([A-Z]{1})([0-9]{9})FI$/iu', $track ) ) {
             
             $services[] = 'posti';
+        }
+        // Почта Чехии
+        if( preg_match( '/^R([A-Z]{1})([0-9]{9})CZ$/iu', $track ) ) {
+            
+            $services[] = 'ceskaposta';
         }
         // Почта Швеции
         if( preg_match( '/^R([A-Z]{1})([0-9]{9})SE$/iu', $track ) ) {
@@ -183,13 +203,18 @@ class Delivery {
             
             $services[] = 'omniva';
         }
+        // Почта Японии
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})JP$/iu', $track ) ) {
+            
+            $services[] = 'japanpost';
+        }
         // СберЛогистика
         if( preg_match( '/^RP([0-9]{9})$/iu', $track ) ) {
 
             $services[] = 'sber';
         }
         // СДЭК
-        if( preg_match( '/^11([0-9]{8})$/iu', $track ) or preg_match( '/^12([0-9]{8})$/iu', $track ) ) {
+        if( preg_match( '/^1([0-9]{9})$/iu', $track ) ) {
 
             $services[] = 'cdek';
         }
@@ -197,7 +222,7 @@ class Delivery {
         return $services;
     }
     
-    public static function getInfo( $code = '' ) {
+    public static function getInfo( $code = '' ): string {
 
         $a = [ '4px'        => '4PX Express',
                'cainiao'    => 'Aliexpress Standard Shipping',
@@ -219,9 +244,13 @@ class Delivery {
                'dellin'     => 'Деловые линии',
                'evropochta' => 'Европочта',
                'cse'        => 'КурьерСервисЭкспресс',
+               'belpost'    => 'Почта Беларуси',
+               'bpost'      => 'Почта Бельгии',
+               'deutschepost' => 'Почта Германии',
                'hkpost'     => 'Почта Гонконга',
                'kazpochta'  => 'Почта Казахстана',
                'chinapost'  => 'Почта Китая',
+               'latvijaspasts' => 'Почта Латвии',
                'malaysiapost' => 'Почта Малайзии',
                'postnl'     => 'Почта Нидерландов',
                'ruspost'    => 'Почта России',
@@ -233,13 +262,14 @@ class Delivery {
                'omniva'     => 'Почта Эстонии',
                'sber'       => 'СберЛогистика',
                'cdek'       => 'СДЭК',
-               // 1.0.5
-               'belpost'    => 'Почта Беларуси',
-               'bpost'      => 'Почта Бельгии',
-               'deutschepost' => 'Почта Германии',
-               'latvijaspasts' => 'Почта Латвии', ];
+               // 1.0.6
+               'israelpost' => 'Почта Израиля',
+               'norwaypost' => 'Почта Норвегии',
+               'ukrposhta'  => 'Почта Украины',
+               'ceskaposta' => 'Почта Чехии',
+               'japanpost'  => 'Почта Японии', ];
         
-        return isset( $a[$code] ) ? $a[$code] : null;
+        return isset( $a[$code] ) ? $a[$code] : '';
     }
 }
 ?>
