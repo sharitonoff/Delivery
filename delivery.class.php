@@ -2,8 +2,8 @@
 /*!
     \brief Класс службы доставки
   
-    @date 07.04.2023
-    @version 1.0.7
+    @date 22.04.2023
+    @version 1.0.8
     @author    Sergey Haritonof <info@haritonof.site>
     @copyright 2023 (c) Sergey Haritonof
 */
@@ -318,30 +318,85 @@ class Delivery {
 
             $services[] = 'postamd';
         }
+        // Почта Монголии
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})MN$/iu', $track ) ) {
+
+            $services[] = 'mongolpost';
+        }
         // Почта Нидерландов
         if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})NL$/iu', $track ) ) {
             
             $services[] = 'postnl';
+        }
+        // Почта Новой Зеландии
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})NZ$/iu', $track ) ) {
+            
+            $services[] = 'nzpost';
         }
         // Почта Норвегии
         if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})NO$/iu', $track ) ) {
             
             $services[] = 'norwaypost';
         }
+        // Почта ОАЭ
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})AE$/iu', $track ) ) {
+            
+            $services[] = 'emiratespost';
+        }
+        // Почта Омана
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})OM$/iu', $track ) ) {
+            
+            $services[] = 'omanpost';
+        }
+        // Почта Пакистана
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})PK$/iu', $track ) ) {
+            
+            $services[] = 'pakpost';
+        }
+        // Почта Польши
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})PL$/iu', $track ) ) {
+            
+            $services[] = 'pocztapolska';
+        }
+        // Почта Португалии
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})PT$/iu', $track ) ) {
+            
+            $services[] = 'ctt';
+        }
         // Почта России
         if( preg_match( '/^([0-9]{14})$/iu', $track ) or preg_match( '/^(C|E|L|R)([A-Z]{1})([0-9]{9})RU$/iu', $track ) ) {
 
             $services[] = 'ruspost';
+        }
+        // Почта Румынии
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})RO$/iu', $track ) ) {
+            
+            $services[] = 'postaromana';
         }
         // Почта Сингапура
         if( preg_match( '/^(L|R)([A-Z]{1})([0-9]{9})SG$/iu', $track ) ) {
             
             $services[] = 'singaporepost';
         }
+        // Почта Словакии
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})SK$/iu', $track ) ) {
+            
+            $services[] = 'slovenskaposta';
+        }
+        // Почта Словении
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})SI$/iu', $track ) ) {
+            
+            $services[] = 'postaslovenije';
+        }
         // Почта США
         if( preg_match( '/^(CF|CH|CJ|CW|EY|EZ|LC|LH|LJ|LK|RU|SX|UA|UJ|UM)([0-9]{9})US$/iu', $track ) ) {
 
             $services[] = 'usps';
+        }
+        // Почта Таджикистана
+        if( preg_match( '/^(R)([A-Z]{1})([0-9]{9})TJ$/iu', $track ) ) {
+            
+            $services[] = 'tajikpost';
         }
         // Почта Турции
         if( preg_match( '/^(C|R|U)([A-Z]{1})([0-9]{9})TR$/iu', $track ) ) {
@@ -404,6 +459,7 @@ class Delivery {
                '8256ru'     => 'BEL',
                'boxberry'   => 'Boxberry',
                'chinaems'   => 'China EMS ePacket',
+               'correoargentino' => 'Correo Argentino',
                'dhl'        => 'DHL Express',
                'dhlglobalmail' => 'DHL Global Mail',
                'rusdpd'     => 'DPD в России',
@@ -411,7 +467,10 @@ class Delivery {
                'iml'        => 'IML',
                'jnet'       => 'J-NET',
                'joom'       => 'Joom Logistics',
+               'mailamericas' => 'MailAmericas',
+               'meestexpress' => 'Meest Express',
                'pony'       => 'Pony Express',
+               'postnorddk' => 'Postnord Denmark',
                'qwintry'    => 'Qwintry Logistics',
                'sypost'     => 'SunYou',
                'yanwen'     => 'YANWEN international express',
@@ -419,15 +478,45 @@ class Delivery {
                'dellin'     => 'Деловые линии',
                'evropochta' => 'Европочта',
                'cse'        => 'КурьерСервисЭкспресс',
+               'australiapost' => 'Почта Австралии',
+               'austrianpost' => 'Почта Австрии',
+               'azerpost'   => 'Почта Азербайджана',
+               'albanianpost' => 'Почта Албании',
+               'haypost'    => 'Почта Армении',
                'belpost'    => 'Почта Беларуси',
                'bpost'      => 'Почта Бельгии',
+               'bgpost'     => 'Почта Болгарии',
+               'postaba'    => 'Почта Боснии и Герцеговины',
+               'brazilcorreios' => 'Почта Бразилии',
+               'royalmail'  => 'Почта Великобритании',
+               'magyarposta' => 'Почта Венгрии',
+               'vnpost'     => 'Почта Вьетнама',
                'deutschepost' => 'Почта Германии',
                'hkpost'     => 'Почта Гонконга',
+               'eltacourier' => 'Почта Греции',
+               'georgianpost' => 'Почта Грузии',
                'israelpost' => 'Почта Израиля',
+               'indonesiaint' => 'Почта Индонезии',
+               'anpost'     => 'Почта Ирландии',
+               'islandicpost' => 'Почта Исландии',
+               'correoses'  => 'Почта Испании',
+               'posteitaliane' => 'Почта Италии',
                'kazpochta'  => 'Почта Казахстана',
+               'canadapost' => 'Почта Канады',
+               'cypruspost' => 'Почта Кипра',
+               'kyrgyzpost' => 'Почта Киргизстана',
                'chinapost'  => 'Почта Китая',
+               'colombiapost' => 'Почта Колумбии',
                'latvijaspasts' => 'Почта Латвии',
+               'libanpost'  => 'Почта Ливана',
+               'lietuvospastas' => 'Почта Литвы',
+               'luxembourgpost' => 'Почта Люксембурга',
+               'madagascarpost' => 'Почта Мадагаскара',
                'malaysiapost' => 'Почта Малайзии',
+               'maltapost'  => 'Почта Мальты',
+               'postemaroc' => 'Почта Марокко',
+               'correosmx'  => 'Почта Мексики',
+               'postamd'    => 'Почта Молдавии',
                'postnl'     => 'Почта Нидерландов',
                'norwaypost' => 'Почта Норвегии',
                'ruspost'    => 'Почта России',
@@ -439,45 +528,22 @@ class Delivery {
                'ceskaposta' => 'Почта Чехии',
                'swedenposten' => 'Почта Швеции',
                'omniva'     => 'Почта Эстонии',
+               'koreapost'  => 'Почта Южной Кореи',
                'japanpost'  => 'Почта Японии',
                'sber'       => 'СберЛогистика',
                'cdek'       => 'СДЭК',
-               // 1.0.7
-               'correoargentino' => 'Correo Argentino',
-               'mailamericas' => 'MailAmericas',
-               'meestexpress' => 'Meest Express', 
-               'postnorddk' => 'Postnord Denmark',
-               'australiapost' => 'Почта Австралии',
-               'austrianpost' => 'Почта Австрии',
-               'azerpost'   => 'Почта Азербайджана',
-               'albanianpost' => 'Почта Албании',
-               'haypost'    => 'Почта Армении',
-               'bgpost'     => 'Почта Болгарии',
-               'postaba'    => 'Почта Боснии и Герцеговины',
-               'brazilcorreios' => 'Почта Бразилии',
-               'royalmail'  => 'Почта Великобритании',
-               'magyarposta' => 'Почта Венгрии',
-               'vnpost'     => 'Почта Вьетнама',
-               'eltacourier' => 'Почта Греции',
-               'georgianpost' => 'Почта Грузии',
-               'indonesiaint' => 'Почта Индонезии',
-               'anpost'     => 'Почта Ирландии',
-               'islandicpost' => 'Почта Исландии',
-               'correoses'  => 'Почта Испании',
-               'posteitaliane' => 'Почта Италии',
-               'canadapost' => 'Почта Канады',
-               'cypruspost' => 'Почта Кипра',
-               'kyrgyzpost' => 'Почта Киргизстана',
-               'colombiapost' => 'Почта Колумбии',
-               'libanpost'  => 'Почта Ливана',
-               'lietuvospastas' => 'Почта Литвы',
-               'luxembourgpost' => 'Почта Люксембурга',
-               'madagascarpost' => 'Почта Мадагаскара',
-               'maltapost'  => 'Почта Мальты',
-               'postemaroc' => 'Почта Марокко',
-               'correosmx'  => 'Почта Мексики',
-               'postamd'    => 'Почта Молдавии',
-               'koreapost'  => 'Почта Южной Кореи',
+               // 1.0.8
+               'mongolpost' => 'Почта Монголии',
+               'nzpost'     => 'Почта Новой Зеландии',
+               'emiratespost' => 'Почта ОАЭ',
+               'omanpost'   => 'Почта Омана',
+               'pakpost'    => 'Почта Пакистана',
+               'pocztapolska' => 'Почта Польши',
+               'ctt'        => 'Почта Португалии',
+               'postaromana' => 'Почта Румынии',
+               'slovenskaposta' => 'Почта Словакии',
+               'postaslovenije' => 'Почта Словении',
+               'tajikpost'  => 'Почта Таджикистана',
         ];
         
         return isset( $a[$code] ) ? $a[$code] : '';
