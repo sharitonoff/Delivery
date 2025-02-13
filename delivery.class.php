@@ -2,10 +2,10 @@
 /*!
     \brief Класс службы доставки
   
-    @date 22.04.2023
-    @version 1.0.8
+    @date 13.02.2025
+    @version 1.0.9
     @author    Sergey Haritonof <info@haritonof.site>
-    @copyright 2023 (c) Sergey Haritonof
+    @copyright 2025 (c) Sergey Haritonof
 */
 
 class Delivery {
@@ -23,13 +23,18 @@ class Delivery {
             
             $services[] = 'cainiao';
         }
+        // Amazon Logistics
+        if( preg_match( '/^TBA([0-9]{12})$/iu', $track ) ) {
+
+            $services[] = 'amazon';
+        }
         // BEL
         if( preg_match( '/^BELLY([0-9]{10})YQ$/iu', $track ) ) {
             
             $services[] = '8256ru';
         }
         // Boxberry
-        if( preg_match( '/^0000([0-9]{9})$/iu', $track ) ) {
+        if( preg_match( '/^0000([0-9]{9})$/iu', $track ) or preg_match( '/^(ABR|AFOX|AAQ|ALP)([0-9]{9})$/iu', $track ) ) {
 
             $services[] = 'boxberry';
         }
@@ -455,6 +460,7 @@ class Delivery {
     public static function getInfo( $code = '' ): string {
 
         $a = [ '4px'        => '4PX Express',
+               'amazon'     => 'Amazon Logistics',
                'cainiao'    => 'Aliexpress Standard Shipping',
                '8256ru'     => 'BEL',
                'boxberry'   => 'Boxberry',
