@@ -1,9 +1,12 @@
 <?php
+
+namespace Haritonof;
+
 /*!
     \brief Класс службы доставки
   
-    @date 13.02.2025
-    @version 1.0.9
+    @date 06.03.2025
+    @version 2.0.0
     @author    Sergey Haritonof <info@haritonof.site>
     @copyright 2025 (c) Sergey Haritonof
 */
@@ -555,4 +558,3 @@ class Delivery {
         return isset( $a[$code] ) ? $a[$code] : '';
     }
 }
-?>
