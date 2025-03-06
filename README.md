@@ -96,8 +96,8 @@
 
 **Получение кода службы доставки:**
 
-> Delivery::getService( 'track number' );
+> \Haritonof\Delivery::getService( 'track number' );
 
 **Получение информации о сервисе по его коду:**
 
-> Delivery::getInfo( 'code' );
+> \Haritonof\Delivery::getInfo( 'code' );
